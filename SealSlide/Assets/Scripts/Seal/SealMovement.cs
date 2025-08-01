@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Splines;
+public class SealMovement : MonoBehaviour
+{
+    [SerializeField] private SplineContainer movementSpline;
+    [SerializeField] [Range(0,0.5f)] private float percentSpeed;
+    private float currentPercent = 0f;
+
+    
+    void Start()
+    {
+        
+    }
+
+    
+    void Update()
+    {
+        //on the update, increase number by Time.DeltaTime
+        //evaluate the x and z
+
+        currentPercent += Time.deltaTime * percentSpeed;
+        currentPercent %= 1f;
+
+        Vector3 currentSplinePos = movementSpline.EvaluatePosition(currentPercent);
+        Vector3 currentSplineRot = movementSpline.EvaluateTangent(currentPercent);
+        transform.position = new Vector3(currentSplinePos.x, transform.position.y, currentSplinePos.z);
+        transform.forward = currentSplineRot;
+    }
+}
