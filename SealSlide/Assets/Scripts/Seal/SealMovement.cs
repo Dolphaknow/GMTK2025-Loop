@@ -27,9 +27,12 @@ public class SealMovement : MonoBehaviour
         Vector3 currentSplinePos = movementSpline.EvaluatePosition(currentPercent);
         Vector3 currentSplineRot = movementSpline.EvaluateTangent(currentPercent);
         Vector3 currentSplineAcc = movementSpline.EvaluateAcceleration(currentPercent);
+        
         transform.forward = currentSplineRot;
         //rb.velocity = transform.forward.normalized;
-        transform.position = new Vector3(currentSplinePos.x, transform.position.y, currentSplinePos.z);
-        //rb.velocity = Vector3.MoveTowards(transform.position, currentSplinePos, 0.1f);
+        //transform.position = new Vector3(currentSplinePos.x, transform.position.y, currentSplinePos.z);
+        rb.velocity = Vector3.MoveTowards(transform.position, currentSplinePos, 0.1f);
+
+
     }
 }
