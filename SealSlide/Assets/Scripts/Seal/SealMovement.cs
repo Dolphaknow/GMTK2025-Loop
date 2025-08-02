@@ -7,11 +7,11 @@ public class SealMovement : MonoBehaviour
     [SerializeField] private SplineContainer movementSpline;
     [SerializeField] [Range(0,0.5f)] private float percentSpeed;
     private float currentPercent = 0f;
-
+    private Rigidbody rb;
     
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     
@@ -25,7 +25,9 @@ public class SealMovement : MonoBehaviour
 
         Vector3 currentSplinePos = movementSpline.EvaluatePosition(currentPercent);
         Vector3 currentSplineRot = movementSpline.EvaluateTangent(currentPercent);
-        transform.position = new Vector3(currentSplinePos.x, transform.position.y, currentSplinePos.z);
+        
         transform.forward = currentSplineRot;
+        //rb.velocity = transform.forward.normalized;
+        transform.position = new Vector3(currentSplinePos.x, transform.position.y, currentSplinePos.z);
     }
 }
