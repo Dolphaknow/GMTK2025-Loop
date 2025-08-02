@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Splines;
 public class SealMovement : MonoBehaviour
 {
+    [SerializeField] private float sealSpeed;
     [SerializeField] private SplineContainer movementSpline;
     [SerializeField] [Range(0,0.5f)] private float percentSpeed;
     private float currentPercent = 0f;
@@ -28,6 +29,7 @@ public class SealMovement : MonoBehaviour
         
         transform.forward = currentSplineRot;
         //rb.velocity = transform.forward.normalized;
-        transform.position = new Vector3(currentSplinePos.x, transform.position.y, currentSplinePos.z);
+        //transform.position = new Vector3(currentSplinePos.x, transform.position.y, currentSplinePos.z);
+        rb.MovePosition(currentSplinePos);
     }
 }
